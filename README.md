@@ -1,1 +1,3 @@
-A static scramjet implementation similar to /staticsj but now uses jsdelivr cdn's to significantly reduce the size of the codebase.
+# Farhan Hub
+
+Farhan Hub by Tundy Team — a static Scramjet web proxy that uses jsDelivr CDNs to keep the codebase small.

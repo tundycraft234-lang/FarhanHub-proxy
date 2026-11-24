@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browser</title>
+    <title>Farhan Hub</title>
+    <meta name="description" content="Farhan Hub — by Tundy Team">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/gh/Destroyed12121/Staticsj@main/JS/scramjet.all.js" defer></script>
     <script type="module">
@@ -19,7 +20,24 @@
 </head>
 
 <body>
-    <!-- Home Button -->
+    <!-- Farhan Hub sidebar (UI only — forwards clicks to the existing browser controls) -->
+    <aside class="fh-sidebar" aria-label="Farhan Hub">
+        <div class="fh-logo" title="Farhan Hub">FH</div>
+        <button class="fh-side-btn" data-fh-action="newtab" title="New Tab"><i class="fa-solid fa-house"></i></button>
+        <button class="fh-side-btn" data-fh-action="reload" title="Reload"><i class="fa-solid fa-rotate-right"></i></button>
+        <button class="fh-side-btn" data-fh-action="devtools" title="DevTools"><i class="fa-solid fa-code"></i></button>
+        <div class="fh-side-spacer"></div>
+        <button class="fh-side-btn" data-fh-action="settings" title="Proxy Settings"><i class="fa-solid fa-gear"></i></button>
+    </aside>
+    <script>
+        document.querySelector('.fh-sidebar').addEventListener('click', function (e) {
+            var btn = e.target.closest('[data-fh-action]');
+            if (!btn) return;
+            var map = { newtab: '.new-tab', reload: '#reload-btn', devtools: '#devtools-btn', settings: '#wisp-settings-btn' };
+            var target = document.querySelector(map[btn.dataset.fhAction]);
+            if (target) target.click();
+        });
+    </script>
 
 
     <div id="app"></div>

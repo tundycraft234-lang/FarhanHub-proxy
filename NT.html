@@ -3,90 +3,183 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>New Tab</title>
+  <title>Farhan Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --bg: #03060f;
+      --surface: rgba(8, 16, 34, 0.85);
+      --surface-hover: rgba(14, 28, 60, 0.95);
+      --border: rgba(0, 212, 255, 0.18);
+      --border-light: rgba(0, 212, 255, 0.45);
+      --text: #e3f6ff;
+      --muted: #7a9cc0;
+      --dim: #4b6585;
+      --accent: #00d4ff;
+      --accent-2: #2f7bff;
+      --glow: 0 0 6px rgba(0, 212, 255, 0.55), 0 0 18px rgba(0, 150, 255, 0.35);
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: #0a0a0a;
-      color: #e4e4e7;
+      background:
+        radial-gradient(ellipse at 50% 38%, rgba(0, 140, 255, 0.16), transparent 55%),
+        radial-gradient(rgba(0, 212, 255, 0.07) 1px, transparent 1px) 0 0 / 22px 22px,
+        var(--bg);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
+      padding: 40px 20px 90px;
     }
 
-    .clock {
-      font-size: 4rem;
+    /* Branding */
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 26px;
+      text-align: center;
+    }
+
+    .brand-title {
+      font-family: 'Orbitron', 'Inter', sans-serif;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #c9f6ff;
+      text-shadow:
+        0 0 4px #fff,
+        0 0 10px var(--accent),
+        0 0 24px var(--accent),
+        0 0 48px var(--accent-2),
+        0 0 80px rgba(47, 123, 255, 0.6);
+      animation: flicker 6s infinite;
+    }
+
+    .brand-sub {
+      margin-top: 6px;
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: -2px;
-      margin-bottom: 8px;
-      color: #ffffff;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 8px rgba(0, 212, 255, 0.7);
     }
 
-    .date {
-      font-size: 14px;
-      color: #71717a;
-      margin-bottom: 32px;
+    .subscribe-badge {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: rgba(0, 212, 255, 0.08);
+      color: #dff8ff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: var(--glow), inset 0 0 8px rgba(0, 212, 255, 0.25);
+      animation: pulse 2.4s ease-in-out infinite;
+      cursor: default;
+      user-select: none;
     }
 
+    .subscribe-badge i { color: var(--accent); text-shadow: 0 0 6px var(--accent); }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 6px rgba(0, 212, 255, 0.5), 0 0 14px rgba(0, 150, 255, 0.3); }
+      50% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.85), 0 0 28px rgba(0, 150, 255, 0.55); }
+    }
+
+    @keyframes flicker {
+      0%, 92%, 100% { opacity: 1; }
+      93% { opacity: 0.75; }
+      94% { opacity: 1; }
+      96% { opacity: 0.85; }
+    }
+
+    /* Search */
     .search-box {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: #0f0f0f;
-      border: 1px solid #1f1f1f;
-      border-radius: 12px;
-      padding: 12px 16px;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px 8px 8px 16px;
       width: 100%;
-      max-width: 500px;
-      margin-bottom: 40px;
+      max-width: 520px;
+      margin-bottom: 28px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .search-box i {
-      color: #71717a;
-      font-size: 14px;
+    .search-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.25), 0 0 22px rgba(0, 212, 255, 0.3);
     }
+
+    .search-box > i { color: var(--muted); font-size: 14px; }
 
     .search-box input {
       flex: 1;
+      min-width: 0;
       background: transparent;
       border: none;
       outline: none;
-      color: #e4e4e7;
+      color: var(--text);
       font-size: 14px;
       font-family: inherit;
     }
 
-    .search-box input::placeholder {
-      color: #52525b;
-    }
+    .search-box input::placeholder { color: var(--dim); }
 
     .search-box select {
-      background: #1a1a1a;
-      border: none;
-      border-radius: 6px;
-      color: #71717a;
-      padding: 6px 10px;
+      background: rgba(0, 212, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      padding: 6px 8px;
       font-size: 12px;
       cursor: pointer;
       outline: none;
     }
 
+    .search-box select option { background: #070d1c; }
+
+    .search-go {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border: none;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #02101f;
+      cursor: pointer;
+      box-shadow: var(--glow);
+      transition: transform 0.15s;
+    }
+
+    .search-go:hover { transform: scale(1.06); }
+
+    /* Shortcuts */
     .shortcuts {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      max-width: 500px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      max-width: 620px;
       width: 100%;
+      margin-bottom: 24px;
     }
 
     .shortcut {
@@ -94,89 +187,132 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
+      width: 60px;
       text-decoration: none;
       cursor: pointer;
     }
 
     .shortcut-icon {
-      width: 52px;
-      height: 52px;
-      background: #0f0f0f;
-      border: 1px solid #1f1f1f;
-      border-radius: 12px;
+      width: 50px;
+      height: 50px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.15s;
+      transition: all 0.18s;
     }
 
     .shortcut:hover .shortcut-icon {
-      background: #1a1a1a;
+      background: var(--surface-hover);
+      border-color: var(--accent);
+      box-shadow: var(--glow);
       transform: translateY(-2px);
     }
 
     .shortcut-icon img {
       width: 22px;
       height: 22px;
-      filter: brightness(0) invert(0.7);
+      /* tint monochrome icons cyan */
+      filter: brightness(0) saturate(100%) invert(76%) sepia(64%) saturate(2600%) hue-rotate(155deg) brightness(102%) contrast(101%);
+      opacity: 0.85;
     }
 
-    .shortcut-icon i {
-      font-size: 20px;
-      color: #71717a;
-    }
+    .shortcut-icon i { font-size: 18px; color: var(--accent); }
 
     .shortcut-label {
       font-size: 11px;
-      color: #71717a;
+      color: var(--muted);
       text-align: center;
-      max-width: 60px;
+      max-width: 64px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .shortcut:hover .shortcut-label {
-      color: #e4e4e7;
+    .shortcut:hover .shortcut-label { color: var(--text); }
+
+    /* Info pills */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 26px;
     }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .pill i { color: var(--accent); }
+    .pill span { color: var(--dim); }
+
+    /* Clock card */
+    .clock-card {
+      padding: 22px 34px;
+      min-width: 190px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(0, 150, 255, 0.18), inset 0 0 18px rgba(0, 212, 255, 0.06);
+    }
+
+    .clock {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+    }
+
+    .date { margin-top: 4px; font-size: 11px; color: var(--muted); }
 
     .quote {
       position: fixed;
-      bottom: 24px;
-      font-size: 13px;
-      color: #52525b;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: var(--dim);
       max-width: 400px;
+      width: calc(100% - 40px);
       text-align: center;
     }
 
     .loader {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(3, 6, 15, 0.92);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 100;
     }
 
-    .loader.show {
-      display: flex;
-    }
+    .loader.show { display: flex; }
 
     .spinner {
-      width: 32px;
-      height: 32px;
-      border: 2px solid #1f1f1f;
-      border-top-color: #ffffff;
+      width: 34px;
+      height: 34px;
+      border: 2px solid rgba(0, 212, 255, 0.15);
+      border-top-color: var(--accent);
       border-radius: 50%;
+      box-shadow: 0 0 14px rgba(0, 212, 255, 0.35);
       animation: spin 0.8s linear infinite;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 
@@ -185,17 +321,21 @@
     <div class="spinner"></div>
   </div>
 
-  <div class="clock" id="clock">00:00</div>
-  <div class="date" id="date"></div>
+  <header class="brand">
+    <h1 class="brand-title">Farhan Hub</h1>
+    <div class="brand-sub">Tundy Team</div>
+    <span class="subscribe-badge"><i class="fa-solid fa-bell"></i> Subscribe</span>
+  </header>
 
   <form class="search-box" id="searchForm">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" id="searchInput" placeholder="Search the web..." autocomplete="off">
+    <input type="text" id="searchInput" placeholder="Search for anything!" autocomplete="off">
     <select id="engine">
       <option value="https://search.brave.com/search?q=">Brave</option>
       <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
       <option value="https://www.google.com/search?q=">Google</option>
     </select>
+    <button type="submit" class="search-go" title="Search"><i class="fa-solid fa-arrow-right"></i></button>
   </form>
 
   <div class="shortcuts" id="shortcuts">
@@ -246,6 +386,16 @@
       <div class="shortcut-icon"><i class="fa-solid fa-plus"></i></div>
       <span class="shortcut-label">Add</span>
     </div>
+  </div>
+
+  <div class="pills">
+    <div class="pill"><i class="fa-solid fa-bolt"></i> Farhan Hub <span>by Tundy Team</span></div>
+    <div class="pill"><i class="fa-solid fa-shield-halved"></i> Private browsing <span>powered by Wisp</span></div>
+  </div>
+
+  <div class="clock-card">
+    <div class="clock" id="clock">00:00</div>
+    <div class="date" id="date"></div>
   </div>
 
   <div class="quote" id="quote"></div>

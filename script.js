@@ -1,11 +1,14 @@
 // =====================================================
 // CONFIGURATION - Gets from config.js
 // =====================================================
-const DEFAULT_WISP = window.SITE_CONFIG?.defaultWisp ?? "wss://glseries.net/wisp/";
-const WISP_SERVERS = [{ name: "GLSeries", url: "wss://glseries.net/wisp/" }];
+const DEFAULT_WISP = window.SITE_CONFIG?.defaultWisp ?? "wss://wisp-server-node-8mmb.onrender.com/wisp/";
+const WISP_SERVERS = [
+    { name: "Farhan Hub (Main)", url: "wss://wisp-server-node-8mmb.onrender.com/wisp/" },
+    { name: "GLSeries", url: "wss://glseries.net/wisp/" }
+];
 
-// Initialize default proxy server if not set
-if (!localStorage.getItem("proxServer")) {
+// Initialize default proxy server if not set (or still on the previous built-in default)
+if (!localStorage.getItem("proxServer") || localStorage.getItem("proxServer") === "wss://glseries.net/wisp/") {
     localStorage.setItem("proxServer", DEFAULT_WISP);
 }
 
