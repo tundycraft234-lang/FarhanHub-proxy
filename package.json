@@ -1,0 +1,16 @@
+{
+  "name": "farhan-hub",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.13.0",
+    "@netlify/blobs": "^11.1.10",
+    "hono": "^4.13.21"
+  },
+  "devDependencies": {
+    "@netlify/edge-functions": "^4.0.4"
+  }
+}
