@@ -1,24 +1,26 @@
 /* Browser Styles */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap');
 
 :root {
-    /* Core colors (can be overridden by user settings) */
-    --bg: #0a0a0a;
-    --surface: #0f0f0f;
-    --surface-hover: #1a1a1a;
-    --surface-active: #252525;
-    --border: #1f1f1f;
-    --border-light: #2a2a2a;
+    /* Core colors — Farhan Hub neon blue theme */
+    --bg: #03060f;
+    --surface: #070d1c;
+    --surface-hover: #0c1630;
+    --surface-active: #112046;
+    --border: rgba(0, 212, 255, 0.16);
+    --border-light: rgba(0, 212, 255, 0.38);
 
     /* Text */
-    --text: #e4e4e7;
-    --text-muted: #71717a;
-    --text-dim: #52525b;
+    --text: #e3f6ff;
+    --text-muted: #7a9cc0;
+    --text-dim: #4b6585;
 
-    /* Accent (customizable) */
-    --accent: #ffffff;
-    --accent-dim: rgba(255, 255, 255, 0.8);
-    --accent-glow: rgba(255, 255, 255, 0.1);
+    /* Accent (neon cyan / electric blue) */
+    --accent: #00d4ff;
+    --accent-2: #2f7bff;
+    --accent-dim: rgba(0, 212, 255, 0.8);
+    --accent-glow: rgba(0, 212, 255, 0.35);
+    --neon-glow: 0 0 6px rgba(0, 212, 255, 0.55), 0 0 18px rgba(0, 150, 255, 0.35);
 
     /* Status colors */
     --success: #22c55e;
@@ -637,4 +639,148 @@ input.bar::placeholder {
 
 .flex {
     display: flex;
+}
+
+/* =====================================================
+   FARHAN HUB — NEON SHELL
+   ===================================================== */
+body {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(0, 120, 255, 0.10), transparent 60%),
+        var(--bg);
+}
+
+/* Left sidebar */
+.fh-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 0;
+    background: rgba(4, 9, 22, 0.95);
+    border-right: 1px solid var(--border);
+    box-shadow: 0 0 18px rgba(0, 160, 255, 0.12);
+    z-index: 50;
+}
+
+.fh-logo {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', var(--font-sans);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    box-shadow: var(--neon-glow), inset 0 0 8px rgba(0, 212, 255, 0.35);
+    text-shadow: 0 0 6px var(--accent);
+}
+
+.fh-side-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+}
+
+.fh-side-btn:hover {
+    color: var(--accent);
+    border-color: var(--border-light);
+    background: var(--surface-hover);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.fh-side-spacer { flex: 1; }
+
+body > #app {
+    position: fixed;
+    top: 0;
+    left: 52px;
+    width: calc(100vw - 52px);
+    background: transparent;
+}
+
+/* Tabs */
+.tabs { background: transparent; }
+
+.tab {
+    border-radius: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+}
+
+.tab.active {
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.28), rgba(47, 123, 255, 0.22));
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+.tab.active .tab-title { color: #fff; text-shadow: 0 0 6px rgba(0, 212, 255, 0.7); }
+
+.new-tab:hover, .nav button:hover {
+    color: var(--accent);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.25);
+}
+
+/* Nav */
+.nav { background: transparent; border-bottom: 1px solid var(--border); }
+
+.nav button { border: 1px solid var(--border); }
+
+input.bar:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.25), 0 0 14px rgba(0, 212, 255, 0.3);
+}
+
+.loading-bar {
+    background: linear-gradient(90deg, var(--accent-2), var(--accent));
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.message-container { background: rgba(3, 6, 15, 0.55); }
+
+.message-content h1 { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
+
+/* Settings modal */
+.settings-card {
+    border-color: var(--border-light);
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.25);
+}
+
+.settings-header h2 i { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+
+.wisp-option.active {
+    border-color: var(--accent);
+    background: rgba(0, 212, 255, 0.08);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
+}
+
+.custom-input-group button { color: #02101f; box-shadow: 0 0 10px var(--accent-glow); }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(0, 212, 255, 0.25); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 560px) {
+    .fh-sidebar { width: 42px; }
+    body > #app { left: 42px; width: calc(100vw - 42px); }
+    .tab { min-width: 130px; }
 }
