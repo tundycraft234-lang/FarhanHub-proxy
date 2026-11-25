@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "@netlify/edge-functions": "^4.0.4"
+  },
+  "scripts": {
+    "build": "rm -rf dist && mkdir -p dist && cp index.html embed.html NT.html script.js style.css sw.js bareworker.js dist/"
   }
 }
